@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  nats:
+    image: nats-streaming
+    ports:
+      - "4223:4223"
+      - "8223:8223"
+    command: -p 4223 -m 8223

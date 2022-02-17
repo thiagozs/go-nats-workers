@@ -40,21 +40,21 @@ func main() {
 	c := consumer.New(ns, "test")
 	p := publisher.New(ns, "test")
 
-	defer c.ExitConsumer()
-
 	go func() {
 		c.Consumer()
 	}()
 
-	for i := 1; i <= 11; i++ {
+	for i := 0; i <= 10; i++ {
+		incIndex := i + 1
 		m := models.Message{
-			Order:       fmt.Sprintf("%s-%d", "order", i),
-			Matches:     fmt.Sprintf("%s-%d", "matches", i),
-			Operations:  fmt.Sprintf("%s-%d", "operations", i),
-			Commissions: fmt.Sprintf("%s-%d", "commissions", i),
+			Order:       fmt.Sprintf("%s-%d", "order", incIndex),
+			Matches:     fmt.Sprintf("%s-%d", "matches", incIndex),
+			Operations:  fmt.Sprintf("%s-%d", "operations", incIndex),
+			Commissions: fmt.Sprintf("%s-%d", "commissions", incIndex),
 		}
 		if err := p.SentMessage(m); err != nil {
 			log.Fatal(err)
 		}
 	}
+	c.ExitConsumer()
 }

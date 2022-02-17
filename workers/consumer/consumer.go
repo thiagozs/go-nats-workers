@@ -33,7 +33,7 @@ func New(instance nats.NatsServiceRepo, channel string) WorkerConsumerRepo {
 	return &WorkerConsumer{
 		stream:     stm,
 		channel:    channel,
-		workerStop: make(chan struct{}),
+		workerStop: make(chan struct{}, 1),
 	}
 }
 
